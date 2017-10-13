@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Image Slideshow</title>
+	<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+	<!-- <script type="text/javascript" src="javascripts/main.js"></script> -->
+	<script type="text/javascript" src="javascripts/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+
+	<div class="container">
+		<img id="first" class="mySlides one" src="images/1.jpg">
+		<img id="second" class="mySlides two" src="images/2.jpg">
+		<img id="third" class="mySlides three" src="images/3.jpg">		
+	</div>
+
+	<div id="control-buttons" class="button">
+		<button id="next" class="w3-button w3-display-left">&#10094;</button>
+		<button id="prev" class="w3-button w3-display-right">&#10095;</button>
+	</div>
+
+	<div id="images">
+		<img id="ey" class="imgBtn" src="images/1.jpg">
+		<img id="oy" class="imgBtn" src="images/2.jpg">
+		<img id="uy" class="imgBtn" src="images/3.jpg">
+	</div>
+
+
+	<script>
+
+		$(document).ready(function() {
+
+			var slideIndex = 1;
+			showDivs(slideIndex);
+
+			/*To handle click events on next and previous buttons*/
+			$("#control-buttons button").click(plusDivs);
+
+			/*To handle click events on thumbnails*/
+			$(".imgBtn").click(displayImage);
+
+			/*Function to pass an index to the showDivs() function to change display attributes of slideshow*/
+			function plusDivs(element) {
+				var elementId = element.currentTarget.id;
+				if(elementId == "next") {
+					showDivs(slideIndex += -1);
+				} else {
+					showDivs(slideIndex += +1);
+				}
+			}
+
+			/*Changes display attributes of images in slideshow*/
+			function showDivs(n) {
+				console.log("index: " + n);
+			    var i;
+			    var x = $('.mySlides');
+			    // If image has reached end of images list then set the image back to the first image
+			    if (n > x.length) {slideIndex = 1} 
+			    // If image is the first image then previous button should display last image
+			    if (n < 1) {slideIndex = x.length} ;
+			    for (i = 0; i < x.length; i++) {
+			        x.eq(i).css('display','none');
+			    }
+			    x.eq(slideIndex-1).css('display','block');
+			}
+
+			/*Function that handles the thumbnails when clicked
+			Gets image source and compares the value to change the visibility of images on slideshow*/
+			function displayImage() {
+				var imgSrc = $(this).attr('src');
+				var visibleImg = $('.mySlides:visible');
+
+				slideIndex = $(".imgBtn").index(this) + 1;
+
+				if(imgSrc != visibleImg.attr('src')) {
+					visibleImg.hide();
+					$("img[src='"+imgSrc+"']").show();
+				}
+			}
+
+			
+
+		});
+
+	</script>
+</body>
+</html>

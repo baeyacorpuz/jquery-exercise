@@ -1,0 +1,21 @@
+.mySlides {
+  width: 648px;
+  height: auto;
+  display: block;
+  margin: auto;
+}
+
+.button {
+  text-align: center;
+  margin: 10px;
+}
+
+img.imgBtn {
+  width: 300px !important;
+  height: 190px !important;
+  display: inline-block !important;
+}
+
+#images {
+  text-align: center;
+}
